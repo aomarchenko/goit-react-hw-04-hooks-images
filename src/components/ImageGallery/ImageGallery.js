@@ -12,7 +12,7 @@ export default function ImageGallery(props) {
 
   useEffect(() => {
     setLoading(true);
-  }, []);
+  }, [page]);
 
   useEffect(() => {
     fetch(
@@ -22,9 +22,8 @@ export default function ImageGallery(props) {
       .then(galery => setGalery(galery))
       .finally(() => setLoading(false));
 
-    // setPage(1);
     props.onFetch(galery);
-  }, [galery]);
+  }, [galery, props.name, page]);
 
   useEffect(() => {
     setPage(1);
