@@ -1,4 +1,3 @@
-import React, { Component } from 'react';
 import styles from '../Searchbar/Searchbar.module.css';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
