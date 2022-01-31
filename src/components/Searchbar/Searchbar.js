@@ -1,58 +1,44 @@
 import React, { Component } from 'react';
 import styles from '../Searchbar/Searchbar.module.css';
-// import { ImSearch } from 'react-icons/im';
+import { useState } from 'react';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-class Searchbar extends Component {
-  state = {
-    name: '',
+export default function Searchbar(props) {
+  const [name, setName] = useState('');
+
+  const handleInputChange = event => {
+    setName(event.currentTarget.value);
   };
 
-  handleInputChange = event => {
-    this.setState({ [event.currentTarget.name]: event.currentTarget.value });
-  };
-
-  handleSubmit = event => {
+  const handleSubmit = event => {
     event.preventDefault();
 
-    if (this.state.name.trim() === '') {
+    if (name.trim() === '') {
       toast.error('Please, type name of image to search');
       return;
     }
 
-    this.props.onSubmit(this.state.name);
+    props.onSubmit(name);
   };
 
-  render() {
-    return (
-      <>
-        <header className={styles.Searchbar}>
-          <form className={styles.SearchForm} onSubmit={this.handleSubmit}>
-            <button className={styles.Button} type="submit"></button>
+  return (
+    <>
+      <header className={styles.Searchbar}>
+        <form className={styles.SearchForm} onSubmit={handleSubmit}>
+          <button className={styles.Button} type="submit"></button>
 
-            <input
-              className={styles.Input}
-              type="text"
-              autoComplete="off"
-              autoFocus
-              placeholder="Search images and photos"
-              name="name"
-              value={this.state.name}
-              onChange={this.handleInputChange}
-            />
-          </form>
-        </header>
-
-        {/* <form onSubmit={this.handleSubmit}>
           <input
+            className={styles.Input}
             type="text"
+            autoComplete="off"
+            autoFocus
+            placeholder="Search images and photos"
             name="name"
-            value={this.state.name}
-            onChange={this.handleInputChange}
-          ></input>
-        </form> */}
-      </>
-    );
-  }
+            value={name}
+            onChange={handleInputChange}
+          />
+        </form>
+      </header>
+    </>
+  );
 }
-export default Searchbar;

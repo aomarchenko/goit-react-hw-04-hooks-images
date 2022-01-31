@@ -1,23 +1,15 @@
-import { Component } from 'react';
 import styles from '../ImageGalleryItem/ImageGalleryItem.module.css';
 
-export default class ImageGalleryItem extends Component {
-  render() {
-    const array = this.props.hits;
+export default function ImageGalleryItem(props) {
+  const array = props.hits;
 
-    return (
-      <>
-        {array.map(item => (
-          <li className={styles.ImageGalleryItem} key={item.id}>
-            <img
-              className={styles.Image}
-              src={item.webformatURL}
-              alt={this.props.name}
-              id={item.id}
-            />
-          </li>
-        ))}
-      </>
-    );
-  }
+  return (
+    <>
+      {array.map(item => (
+        <li className={styles.ImageGalleryItem} key={item.id}>
+          <img className={styles.Image} src={item.webformatURL} alt={props.name} id={item.id} />
+        </li>
+      ))}
+    </>
+  );
 }

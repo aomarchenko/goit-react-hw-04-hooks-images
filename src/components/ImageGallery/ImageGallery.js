@@ -11,16 +11,17 @@ export default function ImageGallery(props) {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    setLoading(true);
-  }, [page]);
+    if (props.name) setLoading(true);
+  }, [page, props.name]);
 
   useEffect(() => {
-    fetch(
-      `https://pixabay.com/api/?key=23676314-92d729b6642f8dfd3ee72d5a9&q=${props.name}&image_type=photo&per_page=12&page=${page}`,
-    )
-      .then(res => res.json())
-      .then(galery => setGalery(galery))
-      .finally(() => setLoading(false));
+    if (props.name)
+      fetch(
+        `https://pixabay.com/api/?key=23676314-92d729b6642f8dfd3ee72d5a9&q=${props.name}&image_type=photo&per_page=12&page=${page}`,
+      )
+        .then(res => res.json())
+        .then(galery => setGalery(galery))
+        .finally(() => setLoading(false));
 
     props.onFetch(galery);
   }, [galery, props.name, page]);
@@ -48,7 +49,7 @@ export default function ImageGallery(props) {
         </ul>
       )}
 
-      {galery && <Button onClick={nextPage} />}
+      {props.name && <Button onClick={nextPage} />}
     </>
   );
 }
