@@ -14,16 +14,16 @@ export default function ImageGallery(props) {
   }, [page, props.name]);
 
   useEffect(() => {
-    if (props.name)
+    if (props.name && page + 1 !== 1)
       fetch(
         `https://pixabay.com/api/?key=23676314-92d729b6642f8dfd3ee72d5a9&q=${props.name}&image_type=photo&per_page=12&page=${page}`,
       )
         .then(res => res.json())
         .then(galery => setGalery(galery))
         .finally(() => setLoading(false));
+  }, [page, props.name]);
 
-    props.onFetch(galery);
-  }, [galery, props.name, page]);
+  props.onFetch(galery);
 
   useEffect(() => {
     setPage(1);

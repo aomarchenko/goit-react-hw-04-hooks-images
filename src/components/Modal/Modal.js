@@ -11,17 +11,17 @@ export default function Modal(props) {
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
     };
-  }, []);
+  });
 
   const handleKeyDown = e => {
     if (e.code === 'Escape') {
-      console.log('Esc');
       props.toggle();
     }
   };
 
   const array = props.hits;
   const imageId = props.id;
+  // eslint-disable-next-line eqeqeq
   const image = array.filter(img => img.id == imageId);
 
   return createPortal(
